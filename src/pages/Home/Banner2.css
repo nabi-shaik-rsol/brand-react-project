@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900');
+.animatetext {
+  /* font-size: 60px; */
+  margin: 100px 0 0;
+  /* border-bottom: 2px solid #ccc; keep like reference; remove if not needed */
+  text-align: center;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+/* Letters default state (before animation) */
+.animatetext span {
+  display: inline-block;
+  opacity: 0;
+  transform: translate(-150px, 0) scale(0.3);
+  will-change: transform, opacity, color;
+}
+	
+/* Start animation when .seven is added */
+.seven span {
+	color: #ffffff;
+	opacity: 0;
+	transform: translate(-150px, 0) scale(.3);
+	animation: leftRight .5s forwards;
+}
+/* Reference-matched motion, but keeps text visible at the end */
+@keyframes leftRight {
+40% {
+		transform: translate(50px, 0) scale(.7);
+		opacity: 1;
+		color: #ffffff;
+	}
+
+	60% {
+		color: #0004ff;
+	}
+
+	80% {
+		transform: translate(0) scale(2);
+		opacity: 0;
+	}
+
+	100% {
+		transform: translate(0) scale(1);
+		opacity: 1;
+	}
+}
+
+/* Smooth fade when moveDown is true */
+/* Smooth fade when moveDown is true */
+.fadeInOpacity {
+  opacity: 0;
+  animation: fadeInOpacity 2.3s ease-in-out forwards;
+}
+
+@keyframes fadeInOpacity {
+  0% {
+    opacity: 0;
+    transform: scale(0.95); /* Slightly smaller at start */
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.02); /* Slight pop effect in the middle */
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1); /* Back to normal size */
+  }
+}
+

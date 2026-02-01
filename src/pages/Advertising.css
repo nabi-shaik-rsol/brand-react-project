@@ -1,0 +1,208 @@
+/* Animations for Brand component - entrance animations enabled, icon floating removed */
+.brand-hero {
+  /* background movement removed as requested - static background */
+  background-repeat: no-repeat;
+  background-size: 120% auto;
+  background-position: center top;
+  animation: none; /* previously: bgShift 18s linear infinite */
+}
+
+/* optional: keep keyframes commented out for quick revert */
+/*
+@keyframes bgShift {
+  0%   { background-position: center top; }
+  50%  { background-position: center bottom; }
+  100% { background-position: center top; }
+}
+*/
+
+.reveal-left {
+  /* slide-in from left on mount; inline animationDelay is supported via style attribute */
+  opacity: 0;
+  transform: translateX(-28px);
+  animation: slideInLeft 700ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes slideInLeft {
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.grid-item {
+  opacity: 0;
+  transform: translateY(50px) scale(0.95);
+  animation: fadeUp 4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+  will-change: transform, opacity;
+  transition: box-shadow 600ms ease, transform 600ms ease;
+  transform-origin: center center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  perspective: 1000;
+}
+
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-8px) scale(1.02); /* little bounce */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* stronger, smoother zoom on hover/focus with elevated shadow */
+.grid-item:hover,
+.grid-item:focus,
+.grid-item:focus-visible {
+  transform: translateY(-10px) scale(1.06);
+  box-shadow: 0 30px 45px rgba(0,0,0,0.45);
+  z-index: 5;
+}
+
+/* subtle press feedback for mouse/touch */
+.grid-item:active {
+  transform: translateY(-4px) scale(1.03);
+}
+
+/* make the icon scale slightly on parent hover for a nicer zoom feel */
+.icon-float {
+  display: inline-block;
+  /* floating motion removed as requested */
+  animation: none;
+  transition: transform 320ms cubic-bezier(0.2, 0.9, 0.2, 1), opacity 200ms;
+  transform-origin: center center;
+}
+
+/* force a slightly smaller icon size across the cards (overrides utility classes) */
+.grid-item .icon-float {
+  width: 30px !important;
+  height: 30px !important;
+}
+
+/* keep a bit larger on very large screens */
+@media (min-width: 1536px) {
+  .grid-item .icon-float {
+    width: 42px !important;
+    height: 40px !important;
+  }
+}
+
+/* reduce hover scale a bit to fit smaller icon */
+.grid-item:hover .icon-float,
+.grid-item:focus .icon-float {
+  transform: scale(1.06) translate(var(--tx, 0), var(--ty, 0));
+}
+
+/* small accessibility hint when item is focused via keyboard */
+.grid-item:focus {
+  outline: 3px solid rgba(255,255,255,0.12);
+  transform: translateY(-8px) scale(1.03);
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .grid-item,
+  .grid-item .icon-float {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+}
+
+/* Ensure heading spans start hidden and become fully clear (no blur) after animation */
+.subHeadingAnimation > span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(6px);
+  filter: blur(4px);
+  will-change: transform, opacity, filter;
+}
+
+@keyframes fade-in {
+  0% { opacity: 0; transform: translateY(20px); filter: blur(4px); }
+  60% { opacity: 0.5; transform: translateY(0); filter: blur(0.8px); }
+  100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+/* Paragraph word animation */
+.paragraphAnimation > span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+/* Reuse fade-in keyframes; adjust speed for words */
+@keyframes fade-in-words {
+  0% { opacity: 0; transform: translateY(6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* If JS applies inline animation (preferred), these are fallbacks */
+.paragraphAnimation > span { animation: fade-in-words 0.6s forwards; }
+
+/* When JS adds .animate to the heading container, child spans will be animated inline via style animation. */
+
+.activations-timer {
+  display: inline-block;
+  transition: transform 420ms cubic-bezier(0.23, 1, 0.32, 1), filter 420ms ease, box-shadow 420ms ease;
+  will-change: transform, filter, box-shadow;
+  transform-origin: center top; /* look like it's dropping from above */
+}
+
+/* smoother drop + diminishing bounces with subtle scale & shadow pulses */
+@keyframes timerDropBounce {
+  0% {
+    transform: translateY(-160px) rotate(-2deg) scale(0.98);
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.08));
+  }
+  20% {
+    transform: translateY(0) rotate(-6deg) scale(1.04);
+    filter: drop-shadow(0 20px 30px rgba(0,0,0,0.28)); /* impact shadow */
+  }
+  36% {
+    transform: translateY(-72px) rotate(-3deg) scale(1.02);
+    filter: drop-shadow(0 10px 18px rgba(0,0,0,0.18));
+  }
+  52% {
+    transform: translateY(0) rotate(-4.5deg) scale(1.03);
+    filter: drop-shadow(0 16px 22px rgba(0,0,0,0.22));
+  }
+  70% {
+    transform: translateY(-28px) rotate(-1.5deg) scale(1.01);
+    filter: drop-shadow(0 8px 12px rgba(0,0,0,0.12));
+  }
+  88% {
+    transform: translateY(0) rotate(-0.6deg) scale(1);
+    filter: drop-shadow(0 6px 10px rgba(0,0,0,0.1));
+  }
+  100% {
+    transform: translateY(0) rotate(0) scale(1);
+    filter: drop-shadow(0 6px 8px rgba(0,0,0,0.08));
+  }
+}
+
+/* apply the drop + diminishing bounces once on load (duration kept at 1600ms for existing timeout) */
+.timer-bounce {
+  animation: timerDropBounce 1600ms cubic-bezier(0.22, 1, 0.36, 1) 0ms both;
+}
+
+/* gentle idle float when not hovered - slightly smoother subtle motion */
+@keyframes timerFloat {
+  0% { transform: translateY(0) rotate(0) scale(1); filter: drop-shadow(0 6px 8px rgba(0,0,0,0.08)); }
+  50% { transform: translateY(-20px) rotate(-0.6deg) scale(1.002); filter: drop-shadow(0 10px 18px rgba(0,0,0,0.12)); }
+  100% { transform: translateY(0) rotate(0) scale(1); filter: drop-shadow(0 6px 8px rgba(0,0,0,0.08)); }
+}
+
+.timer-float {
+  animation: timerFloat 6s ease-in-out infinite both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .activations-timer { animation: none !important; transition: none !important; transform: none !important; }
+  .timer-bounce, .timer-float { animation: none !important; }
+}

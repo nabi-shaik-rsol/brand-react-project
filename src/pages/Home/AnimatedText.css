@@ -1,0 +1,35 @@
+.cd-headline {
+  perspective: 400px;
+}
+
+.is-hidden {
+  display: none;
+}
+
+.is-visible {
+  display: inline-block;
+  transform-origin: center bottom;
+  backface-visibility: hidden;
+  font-weight: 400;
+  animation: rotateFrontBack 2s ease-in-out forwards;
+}
+
+/* Subtle Rotate Animation */
+@keyframes rotateFrontBack {
+  0% {
+    transform: rotateX(30deg); /* slight backward */
+    opacity: 0;
+  }
+  20% {
+    transform: rotateX(0deg); /* comes forward */
+    opacity: 1;
+  }
+  70% {
+    transform: rotateX(0deg); /* stay visible */
+    opacity: 1;
+  }
+  100% {
+    transform: rotateX(-30deg); /* rotate slightly backward and disappear */
+    opacity: 0;
+  }
+}

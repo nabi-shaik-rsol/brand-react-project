@@ -1,0 +1,53 @@
+.scroll-marquee {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  perspective: 1200px;
+  perspective-origin: 50% 40%;
+}
+
+/* track holds two copies of the GIFs for a seamless loop */
+.scroll-marquee .scroll-track {
+  display: flex;
+  gap: 0;
+  align-items: center;
+  --marquee-speed: 18s;
+  animation: scroll-left var(--marquee-speed) linear infinite;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.scroll-marquee .scroll-track img {
+  flex: 0 0 auto;
+  width: 15.11%; /* maintain original width */
+  height: auto;
+  display: block;
+  backface-visibility: hidden;
+  transform-origin: center center;
+  will-change: transform, opacity;
+  object-fit: cover;
+  transition: transform 300ms ease;
+  cursor: pointer;
+}
+
+.scroll-marquee .scroll-track img.gif-hover {
+  transform: scale(1.3) !important;
+  z-index: 5;
+}
+
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Pause on hover */
+.scroll-marquee:hover .scroll-track {
+  animation-play-state: paused;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-marquee .scroll-track {
+    animation: none;
+  }
+}

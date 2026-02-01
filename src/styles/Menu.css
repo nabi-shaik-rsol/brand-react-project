@@ -1,0 +1,66 @@
+.menu {
+  opacity: 0;
+  filter: blur(10px);
+  animation: fade-in-menu 500ms ease-in-out 0s 1 forwards;
+}
+
+@keyframes fade-in-menu {
+  0% {
+    opacity: 0;
+    filter: blur(10px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+.menu.fade-out {
+  animation: fade-out 1s ease-in-out 0s 1 forwards;
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+    filter: blur(0);
+  }
+  40% {
+    opacity: 1;
+    filter: blur(0);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(10px);
+  }
+}
+
+.menuLinks {
+  transform: translateY(100%);
+  animation: textEnter 750ms ease-in-out 400ms 1 forwards;
+}
+
+@keyframes textEnter {
+  0% {
+    /* opacity: 1;
+    filter: blur(0); */
+    transform: translateY(100%);
+  }
+  100% {
+    /* opacity: 1;
+      filter: blur(0); */
+    transform: translateY(0);
+  }
+}
+
+.menuLinks.exit {
+  animation: textExit 500ms ease-in-out 0ms 1 forwards;
+}
+
+@keyframes textExit {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-120%);
+  }
+}
