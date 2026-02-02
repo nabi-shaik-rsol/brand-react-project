@@ -1,0 +1,1 @@
+.rotatingAnimation{animation:rotate 40s linear infinite}.rotatingAnimation2{animation:rotate2 40s linear infinite}@keyframes rotate{0%{transform:rotate(0)}to{transform:rotate(360deg)}}@keyframes rotate2{0%{transform:rotate(360deg)}to{transform:rotate(0)}}
